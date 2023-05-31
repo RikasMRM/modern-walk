@@ -34,7 +34,7 @@ const Category: React.FC = () => {
 
   return (
     <div className="p-10">
-      <h1>{category}</h1>
+      <p className="font-bold text-left text-3xl mb-10">{category}</p>
       <ProductRow products={products} />
     </div>
   );

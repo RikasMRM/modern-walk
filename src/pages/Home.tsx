@@ -36,7 +36,7 @@ const Home: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-center">
         <Link
           to="/mens-clothing"
-          className="inline-block bg-green-500 text-white px-40 py-20 rounded-lg text-4xl w-full"
+          className="inline-block bg-teal-400 text-white px-40 py-20 rounded-lg text-4xl w-full"
         >
           Men's Clothing
         </Link>
