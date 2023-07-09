@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProducts } from "../services/api";
 import ProductRow from "../components/organisms/ProductRow";
-import CategoryLayout from '../layouts/CategoryLayout';
+import CategoryLayout from "../layouts/CategoryLayout";
 
 interface Product {
   id: number;
