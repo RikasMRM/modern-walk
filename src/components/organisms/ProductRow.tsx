@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "./ProductCard";
+import ProductCard from "../molecules/ProductCard";
 
 interface Product {
   id: number;
@@ -29,5 +29,4 @@ const ProductRow: React.FC<ProductRowProps> = ({ products }) => {
     </div>
   );
 };
-
 export default ProductRow;
