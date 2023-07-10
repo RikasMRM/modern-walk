@@ -1,5 +1,5 @@
 import React from "react";
-import CategoryTemplate from "../template/CategoryTemplate";
+import { CategoryTemplate } from "../template";
 
 const Category: React.FC = () => {
   return <CategoryTemplate />;

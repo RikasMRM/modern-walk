@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProducts } from "../services/api";
-import ProductRow from "../components/organisms/ProductRow";
-import MainLayout from "../layouts/MainLayout";
+import { ProductRow } from "../components/organisms";
+import { MainLayout } from "../layouts";
 
 interface Product {
   id: number;
@@ -51,4 +51,5 @@ const HomeTemplate: React.FC = () => {
     </MainLayout>
   );
 };
+
 export default HomeTemplate;

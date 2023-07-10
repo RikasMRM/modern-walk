@@ -1,6 +1,5 @@
 import React from "react";
-import Image from "../atoms/Image";
-import Title from "../atoms/Title";
+import { Image, Title } from "../atoms";
 
 interface ProductCardProps {
   image: string;
