@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "../molecules/ProductCard";
+import { ProductCard } from "../molecules";
 
 interface Product {
   id: number;

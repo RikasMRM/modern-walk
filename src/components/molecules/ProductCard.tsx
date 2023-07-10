@@ -1,6 +1,5 @@
 import React from "react";
-import Image from "../atoms/Image";
-import Title from "../atoms/Title";
+import { Image, Title } from "../atoms";
 
 interface ProductCardProps {
   image: string;
@@ -26,7 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div className="max-w-sm bg-white rounded-lg overflow-hidden shadow-xl pb-0">
-      <Title>{truncateString(title, 15)}</Title>
+      <Title>{truncateString(title, 16)}</Title>
       <Image src={image} alt={title} />
       <div className={`p-5 rounded-lg text-center ${categoryColor}`}>
         <p className="font-bold text-xl text-blue-800">Rs {price}</p>
