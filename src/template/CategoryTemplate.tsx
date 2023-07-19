@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProducts } from "../services/api";
+import { ProductsAPI } from "../services/index";
 import ProductRow from "../components/organisms/ProductRow";
 import CategoryLayout from "../layouts/CategoryLayout";
 
@@ -22,9 +22,9 @@ const CategoryTemplate: React.FC = () => {
       let fetchedProducts: Product[] = [];
 
       if (category === "mens-clothing") {
-        fetchedProducts = await getProducts("men's clothing");
+        fetchedProducts = await ProductsAPI.getProducts("men's clothing");
       } else if (category === "womens-clothing") {
-        fetchedProducts = await getProducts("women's clothing");
+        fetchedProducts = await ProductsAPI.getProducts("women's clothing");
       }
 
       setProducts(fetchedProducts);

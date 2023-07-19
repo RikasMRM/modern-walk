@@ -17,3 +17,7 @@ run;
 ```bash
 npm run dev
 ```
+
+```bash
+json-server --watch db.json
+```

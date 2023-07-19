@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "../components/atoms/Button";
 import FormField from "../components/atoms/FormField";
-import { registerUser } from "../services/api-db.js";
+import { UsersAPI } from "../services/index";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const userData = { email, password };
-      const newUser = await registerUser(userData);
+      const newUser = await UsersAPI.registerUser(userData);
       console.log("Registered new user:", newUser);
       window.location.href = "/login";
     } catch (error) {

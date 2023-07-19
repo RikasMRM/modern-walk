@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getProducts } from "../services/api";
+import { ProductsAPI } from "../services/index";
 import ProductRow from "../components/organisms/ProductRow";
 import MainLayout from "../layouts/MainLayout";
 
@@ -18,8 +18,8 @@ const HomeTemplate: React.FC = () => {
 
   useEffect(() => {
     const fetchFlashSaleProducts = async () => {
-      const mensProducts = await getProducts("men's clothing");
-      const womensProducts = await getProducts("women's clothing");
+      const mensProducts = await ProductsAPI.getProducts("men's clothing");
+      const womensProducts = await ProductsAPI.getProducts("women's clothing");
       setFlashSaleProducts([
         ...mensProducts.slice(1, 3),
         ...womensProducts.slice(0, 2),

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "../components/atoms/Button";
 import FormField from "../components/atoms/FormField";
-import { loginUser } from "../services/api-db";
+import { UsersAPI } from "../services/index";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const userData = { email, password };
-      const user = await loginUser(userData);
+      const user = await UsersAPI.loginUser(userData);
       console.log("Logged in user:", user);
       window.location.href = "/home";
     } catch (error) {
