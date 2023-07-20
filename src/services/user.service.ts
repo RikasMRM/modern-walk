@@ -1,12 +1,8 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://localhost:3000",
-});
+import { clientApi } from "./api.service";
 
 export const registerUser = async (userData: any) => {
   try {
-    const response = await api.post("/users", userData);
+    const response = await clientApi.post("/users", userData);
     return response.data;
   } catch (error) {
     console.error("Error registering user:", error);
@@ -16,7 +12,7 @@ export const registerUser = async (userData: any) => {
 
 export const loginUser = async (userData: { email: any; password: any; }) => {
   try {
-    const response = await api.get("/users", {
+    const response = await clientApi.get("/users", {
       params: {
         email: userData.email,
         password: userData.password,
