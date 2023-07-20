@@ -1,10 +1,24 @@
-import axios from "axios";
+import { productApi } from "./api.service";
 
-const api = axios.create({
-  baseURL: "https://fakestoreapi.com/",
-});
+export const getProducts = async () => {
+  const products = await productApi.get("/products");
+  return products.data;
+};
+export const getFlashSaleProducts = async () => {
+  const mensProducts = await productApi.get(
+    "/products/category/men's clothing?limit=2"
+  );
+  const womenProducts = await productApi.get(
+    "/products/category/women's clothing?limit=2"
+  );
+  return [...mensProducts.data, ...womenProducts.data];
+};
 
-export const getProducts = async (category: string) => {
-  const response = await api.get(`products/category/${category}`);
-  return response.data;
+export const getMensProducts = async () => {
+  const products = await productApi.get("/products/category/men's clothing");
+  return products.data;
+};
+export const getWomenProducts = async () => {
+  const products = await productApi.get("/products/category/women's clothing");
+  return products.data;
 };

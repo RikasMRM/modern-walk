@@ -17,16 +17,10 @@ const HomeTemplate: React.FC = () => {
   const [flashSaleProducts, setFlashSaleProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    const fetchFlashSaleProducts = async () => {
-      const mensProducts = await ProductsAPI.getProducts("men's clothing");
-      const womensProducts = await ProductsAPI.getProducts("women's clothing");
-      setFlashSaleProducts([
-        ...mensProducts.slice(1, 3),
-        ...womensProducts.slice(0, 2),
-      ]);
-    };
-
-    fetchFlashSaleProducts();
+    (async () => {
+      const items = await ProductsAPI.getFlashSaleProducts();
+      setFlashSaleProducts(items);
+    })();
   }, []);
 
   return (

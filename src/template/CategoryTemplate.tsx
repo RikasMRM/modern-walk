@@ -22,9 +22,9 @@ const CategoryTemplate: React.FC = () => {
       let fetchedProducts: Product[] = [];
 
       if (category === "mens-clothing") {
-        fetchedProducts = await ProductsAPI.getProducts("men's clothing");
+        fetchedProducts = await ProductsAPI.getMensProducts();
       } else if (category === "womens-clothing") {
-        fetchedProducts = await ProductsAPI.getProducts("women's clothing");
+        fetchedProducts = await ProductsAPI.getWomenProducts();
       }
 
       setProducts(fetchedProducts);
