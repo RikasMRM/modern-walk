@@ -1,41 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { ProductsAPI } from "../services/index";
 import ProductRow from "../components/organisms/ProductRow";
 import CategoryLayout from "../layouts/CategoryLayout";
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-}
-
 const CategoryTemplate: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
   const { category } = useParams<{ category: string }>();
+  const {
+    data: mensProducts,
+    isLoading: isLoadingMens,
+    error: errorMens,
+  } = ProductsAPI.useMensProducts();
+  const {
+    data: womenProducts,
+    isLoading: isLoadingWomen,
+    error: errorWomen,
+  } = ProductsAPI.useWomenProducts();
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      let fetchedProducts: Product[] = [];
+  if (
+    (category === "mens-clothing" && isLoadingMens) ||
+    (category === "womens-clothing" && isLoadingWomen)
+  ) {
+    return <div>Loading...</div>;
+  }
 
-      if (category === "mens-clothing") {
-        fetchedProducts = await ProductsAPI.getMensProducts();
-      } else if (category === "womens-clothing") {
-        fetchedProducts = await ProductsAPI.getWomenProducts();
-      }
+  if (
+    (category === "mens-clothing" && errorMens) ||
+    (category === "womens-clothing" && errorWomen)
+  ) {
+    return <div>Error: "failed..."</div>;
+  }
 
-      setProducts(fetchedProducts);
-    };
+  const products = category === "mens-clothing" ? mensProducts : womenProducts;
+  // const {
+  //   data: products,
+  //   isLoading,
+  //   error,
+  // } = category === "mens-clothing"
+  //   ? ProductsAPI.useMensProducts()
+  //   : ProductsAPI.useWomenProducts();
 
-    fetchProducts();
-  }, [category]);
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // if (error) {
+  //   return <div>Error: "failed..."</div>;
+  // }
 
   return (
     <CategoryLayout>
-      <ProductRow products={products} />
+      <ProductRow products={products || []} />
     </CategoryLayout>
   );
 };

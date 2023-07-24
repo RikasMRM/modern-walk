@@ -6,13 +6,14 @@ import { UsersAPI } from "../services/index";
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { mutate, isLoading, isError } = UsersAPI.useLoginUser();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
       const userData = { email, password };
-      const user = await UsersAPI.loginUser(userData);
-      console.log("Logged in user:", user);
+      await mutate(userData);
+      console.log("Login successful!");
       window.location.href = "/home";
     } catch (error) {
       console.error("Login failed:", error);
@@ -48,9 +49,11 @@ const LoginForm = () => {
           <Button
             type="submit"
             className="bg-blue-500 text-white rounded-md px-4 py-2 mb-2"
+            disabled={isLoading}
           >
-            Login
+            {isLoading ? "Logging In..." : "Login"}
           </Button>
+          {isError && <p>Error logging in</p>}
           <br />
           <p>
             Don't have an account? <a href="/register">Register here</a>.

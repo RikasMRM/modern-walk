@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { ProductsAPI } from "../services/index";
 import ProductRow from "../components/organisms/ProductRow";
 import MainLayout from "../layouts/MainLayout";
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-}
-
 const HomeTemplate: React.FC = () => {
-  const [flashSaleProducts, setFlashSaleProducts] = useState<Product[]>([]);
+  const {
+    data: flashSaleProducts,
+    isLoading,
+    error,
+  } = ProductsAPI.useFlashSaleProducts();
 
-  useEffect(() => {
-    (async () => {
-      const items = await ProductsAPI.getFlashSaleProducts();
-      setFlashSaleProducts(items);
-    })();
-  }, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: "failed..."</div>;
+  }
 
   return (
     <MainLayout>
       <p className="font-bold text-left text-3xl mb-10">Flash Sale</p>
-      <ProductRow products={flashSaleProducts} />
+      {flashSaleProducts?.length ? (
+        <ProductRow products={flashSaleProducts} />
+      ) : (
+        <div>No flash sale products available.</div>
+      )}
       <p className="font-bold text-left text-3xl mb-10 mt-10">Categories</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-center">
         <Link

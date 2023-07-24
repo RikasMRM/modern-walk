@@ -6,13 +6,14 @@ import { UsersAPI } from "../services/index";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { mutate, isLoading, isError } = UsersAPI.useLoginUser();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
       const userData = { email, password };
-      const newUser = await UsersAPI.registerUser(userData);
-      console.log("Registered new user:", newUser);
+      await mutate(userData);
+      console.log("Registered new user!");
       window.location.href = "/login";
     } catch (error) {
       console.error("Registration failed:", error);
@@ -49,9 +50,11 @@ const Register = () => {
           <Button
             type="submit"
             className="bg-blue-500 text-white rounded-md px-4 py-2 mb-2"
+            disabled={isLoading}
           >
-            Register
+            {isLoading ? "Registering..." : "Register"}
           </Button>
+          {isError && <p>Error while Registering</p>}
           <br />
           <p>
             Already have an account? <a href="/">Login here</a>.
